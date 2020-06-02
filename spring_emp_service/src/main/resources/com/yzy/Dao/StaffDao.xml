@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.Dao.StaffDao">
+    <resultMap id="resultMap" type="Staff">
+        <id property="id" column="id" javaType="Integer"></id>
+        <result property="account" column="account" javaType="String"></result>
+        <result property="password" column="password" javaType="String"></result>
+        <result property="status" column="status" javaType="String"></result>
+        <result property="did" column="did" javaType="Integer"></result>
+        <result property="name" column="name" javaType="String"></result>
+        <result property="sex" column="sex" javaType="String"></result>
+        <result property="idNumber" column="id_number" javaType="String"></result>
+        <result property="workTime" column="work_time" javaType="java.util.Date"></result>
+        <result property="leaveTime" column="leave_tiem" javaType="java.util.Date"></result>
+        <result property="bornDate" column="born_date" javaType="java.util.Date" ></result>
+        <result property="info" column="info" javaType="String"></result>
+        <association property="department" column="did" javaType="department" select="com.yzy.Dao.departmentDao.selectById"></association>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" parameterType="Staff">
+        insert into staff(account,password,status,did,name,sex,id_number,work_time,leave_time,born_date,info)
+        values(#{account},#{password},#{status},#{did},#{name},#{sex},#{idNumber},#{workTime},#{leaveTime},#{bornDate},#{info})
+    </insert>
+    <update id="update" parameterType="Staff">
+        update staff set account=#{account},password=#{password},status=#{status},
+        did=#{did},name=#{name},sex=#{sex},id_number=#{idNumber},
+        work_time=#{workTime},leave_time=#{leaveTime},born_date=#{bornDate},info=#{info} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        delete from staff where id =#{id}
+    </delete>
+
+    <select id="selectAll" resultMap="resultMap">
+        select * from staff
+    </select>
+
+    <select id="selectById" resultMap="resultMap" parameterType="Integer">
+        select * from staff where id =#{id}
+    </select>
+
+
+
+
+</mapper>

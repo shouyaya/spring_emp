@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--配置命名空间，需和dao接口一致-->
+<mapper namespace="com.yzy.Dao.departmentDao">
+<!--    配置结果集，将数据库的表与实体类对应-->
+    <resultMap id="resultMap" type="department">
+        <id property="id" column="id" javaType="Integer"></id>
+        <result property="name" column="name" javaType="String"></result>
+        <result property="address" column="address" javaType="String"></result>
+    </resultMap>
+<!--    配置sql语句，id需与dao接口的方法名一一对应-->
+    <insert id="add" useGeneratedKeys="true" parameterType="department">
+        insert department(name,address) value(#{name},#{address})
+    </insert>
+    <update id="update" parameterType="department">
+        update department set name=#{name},address=#{address} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        delete from department where id =#{id}
+    </delete>
+    <select id="selectAll" resultMap="resultMap">
+        select * from department
+    </select>
+    <select id="selectById" parameterType="Integer" resultMap="resultMap">
+        select * from department where id =#{id}
+    </select>
+</mapper>

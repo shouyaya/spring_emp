@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--配置命名空间，需和dao接口一致-->
+<mapper namespace="com.yzy.Dao.LogDao">
+<!--    配置结果集，将数据库的表与实体类对应-->
+    <resultMap id="resultMap" type="Log">
+        <result property="oprTime" column="opr_time" javaType="java.util.Date"></result>
+        <result property="type" column="type" javaType="String"></result>
+        <result property="operator" column="operator" javaType="String"></result>
+        <result property="moudle" column="moudle" javaType="String"></result>
+        <result property="operation" column="operation" javaType="String"></result>
+        <result property="result" column="result" javaType="String"></result>
+    </resultMap>
+
+    <select id="selectLogByType" resultMap="resultMap" parameterType="String">
+        select * from log where type=#{type}
+    </select>
+
+    <insert id="insertLog" parameterType="Log">
+        insert log value(#{oprTime},#{type},#{operator},#{moudle},#{operation},#{result})
+    </insert>
+
+</mapper>

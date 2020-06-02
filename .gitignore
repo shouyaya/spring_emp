@@ -1,0 +1,3 @@
+# Project exclude paths
+/spring_emp_service/target/
+/spring_emp_web/target/
